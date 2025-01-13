@@ -9,16 +9,15 @@ import pyspark.sql.types as T
 
 if __name__ == "__main__":
     # Create and configure SparkSession
-    spark = SparkSession.builder.appName("GoldLayer").getOrCreate()
+    spark = SparkSession.builder.appName("SilverLayer").getOrCreate()
 
     try:
         # Read dataframe in silver
-        df = spark.read.parquet("/TFM/data/silver/velocidades_bitcarrier.parquet")
+        df = spark.read.parquet("/TFM/data/bronze/velocidades_bitcarrier.parquet")
 
         # Filter DataFrame
         (
-            df.where((F.col("AÑO") == 2022) & (F.col("NAME_FROM") == "KR7") & (F.col("TYPE") == 1))
-                .withColumns(
+            df.withColumns(
                     {
                         "YEAR": F.year(F.col("INICIO")).cast(T.IntegerType()),
                         "MINUTE": F.minute(F.col("INICIO")).cast(T.IntegerType()),
@@ -43,7 +42,8 @@ if __name__ == "__main__":
                 F.col("NAME_TO"),
                 F.col("NAME_TO_1"),
                 F.col("NAME_TO_2"),
-                F.col("DIRECTION")
+                F.col("DIRECTION"),
+                F.col("NUMDISPOSITIVOS")
             ).withColumnsRenamed({
                 "INICIO": "start",
                 "YEAR": "year",
@@ -57,9 +57,10 @@ if __name__ == "__main__":
                 "NAME_TO": "name_to",
                 "NAME_TO_1": "name_to_1",
                 "NAME_TO_2": "name_to_2",
-                "DIRECTION": "direction"
+                "DIRECTION": "direction",
+                "NUMDISPOSITIVOS": "numdispositivos"
             })
-        ).write.mode("overwrite").parquet("/TFM/data/gold/velocidades_bitcarrier.parquet")
+        ).write.mode("overwrite").parquet("/TFM/data/silver/velocidades_bitcarrier.parquet")
 
     finally:
         spark.stop()

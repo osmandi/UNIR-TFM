@@ -3,15 +3,15 @@
 
 # Create folders in the HDFS to raw data
 hdfs dfs -mkdir -p /TFM/data/raw
+hdfs dfs -mkdir -p /TFM/data/bronze
 hdfs dfs -mkdir -p /TFM/data/silver
-hdfs dfs -mkdir -p /TFM/data/gold
 
 # Folders to save output files
 hdfs dfs -mkdir -p /TFM/output
 
 # Copy file from GCS to local
 mkdir -p /tmp/TFM
-gcloud storage cp $GCS_BUCKET/raw_data/data.zip /tmp/TFM
+gcloud storage cp $GCS_BUCKET/raw/data.zip /tmp/TFM
 
 # Unzip file
 unzip /tmp/TFM/data.zip -d /tmp/TFM/

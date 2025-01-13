@@ -12,7 +12,7 @@ import functools
 if __name__ == "__main__":
 
     # Create and configure SparkSession
-    spark = SparkSession.builder.appName("CleanData").getOrCreate()
+    spark = SparkSession.builder.appName("BronzeLayer").getOrCreate()
     spark.sql("set spark.sql.legacy.timeParserPolicy=LEGACY")  # To prevent this error: "Fail to parse '4/1/2020 9:15:00 AM'
 
     try:
@@ -42,7 +42,7 @@ if __name__ == "__main__":
         )
 
         # Save in parquet format
-        df.write.mode("overwrite").parquet("/TFM/data/silver/velocidades_bitcarrier.parquet")
+        df.write.mode("overwrite").parquet("/TFM/data/bronze/velocidades_bitcarrier.parquet")
 
     finally:
         spark.stop()
