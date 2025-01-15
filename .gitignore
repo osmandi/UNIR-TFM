@@ -189,3 +189,6 @@ override.tf.json
 .terraformrc
 terraform.rc
 .terraform.lock.hcl
+
+# Exclude data
+Fase 5 - Contraste de hipótesis/*.csv
