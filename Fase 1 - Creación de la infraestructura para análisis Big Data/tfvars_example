@@ -1,0 +1,5 @@
+# Names resources
+project_id = ""
+bucket_name = ""
+dataproc_name = ""
+region = ""

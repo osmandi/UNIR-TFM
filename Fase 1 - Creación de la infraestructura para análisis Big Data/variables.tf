@@ -21,13 +21,13 @@ variable dataproc_name {
 variable worker_instances_number {
   type = number
   description = "Number of instances to start"
-  default = 2
+  default = 4
 }
 
 variable boot_size_disk_master {
   type = number
   description = "Size of disc in master node"
-  default = 100
+  default = 50
 }
 
 variable boot_size_disk_worker {
@@ -39,9 +39,11 @@ variable boot_size_disk_worker {
 variable "instance_type_master" {
   type = string
   description = "The type of VM instance for master"
+  default = "n1-standard-4"
 }
 
 variable "instance_type_worker" {
   type = string
   description = "The type of VM instance for workers"
+  default = "n2-highmem-4"
 }

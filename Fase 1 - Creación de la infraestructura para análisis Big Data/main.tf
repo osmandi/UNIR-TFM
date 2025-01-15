@@ -4,11 +4,11 @@ provider "google" {
 }
 
 # En este bucket se guardan los notebooks
-#resource "google_storage_bucket" "tf_gcs_bucket" {
-#  name     = var.bucket_name
-#  location = "US"
-#  force_destroy = true
-#}
+resource "google_storage_bucket" "tf_gcs_bucket" {
+  name     = var.bucket_name
+  location = "US"
+  force_destroy = true
+}
 
 resource "google_dataproc_cluster" "bigdata_dataproc2" {
   name   = var.dataproc_name
